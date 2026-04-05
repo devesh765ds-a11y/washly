@@ -1,0 +1,76 @@
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f5e8d6;
+}
+
+nav{
+background:#0c2c54;
+color:white;
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:500;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
+.hero{
+background:#0c2c54;
+color:white;
+padding:100px 40px;
+text-align:center;
+}
+
+button{
+background:#e8d5b7;
+border:none;
+padding:12px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.container{
+padding:50px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+input{
+padding:10px;
+width:250px;
+margin:10px 0;
+}
+
+.time-slot{
+background:#0c2c54;
+color:white;
+padding:12px;
+margin:10px;
+display:inline-block;
+border-radius:6px;
+cursor:pointer;
+}
