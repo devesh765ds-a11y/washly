@@ -74,3 +74,75 @@ display:inline-block;
 border-radius:6px;
 cursor:pointer;
 }
+
+/* MAIN LAYOUT */
+.main {
+  display: flex;
+  height: 90vh;
+}
+
+/* LEFT SIDE */
+.login-box {
+  width: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+}
+
+.login-box h2 {
+  font-size: 28px;
+  color: #1e3a8a;
+}
+
+.sub {
+  margin: 10px 0 30px;
+  color: #777;
+}
+
+/* FORM */
+form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background: #1e3a8a; /* blue */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #16307a;
+}
+
+.signup {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup span {
+  color: #1e3a8a;
+  cursor: pointer;
+}
+
+/* RIGHT SIDE */
+.visual {
+  width: 50%;
+  background: #eaddcf; /* beige tone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual img {
+  width: 60%;
+}
