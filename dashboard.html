@@ -2,40 +2,40 @@
 <html>
 
 <head>
-
 <title>Garment Tracking</title>
 <link rel="stylesheet" href="style.css">
-
 <script src="https://unpkg.com/html5-qrcode"></script>
-
 </head>
 
 <body>
 
 <nav>
-
-<div class="logo">Washly</div>
-
-<div>
-<a href="index.html">Home</a>
-<a href="catalogue.html">Catalogue</a>
-</div>
-
+  <div class="logo">Washly</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="catalogue.html">Catalogue</a>
+  </div>
 </nav>
 
+<div class="tracking-container">
 
-<div class="container">
+  <h2>Track Your Garment</h2>
+  <p class="sub">Scan QR code to check status</p>
 
-<h2>Garment QR Tracking</h2>
+  <!-- Illustration -->
+  <img class="tracking-img" src="https://cdn-icons-png.flaticon.com/512/5676/5676350.png">
 
-<div id="reader" style="width:300px;"></div>
+  <!-- Scanner Box -->
+  <div class="scanner-box">
+    <div id="reader"></div>
+  </div>
 
-<div id="result"></div>
+  <!-- Result -->
+  <div id="result" class="result-box"></div>
 
 </div>
 
 <script>
-
 function onScanSuccess(decodedText){
 
 document.getElementById("result").innerHTML =
@@ -50,7 +50,6 @@ let scanner = new Html5QrcodeScanner(
 )
 
 scanner.render(onScanSuccess)
-
 </script>
 
 </body>
