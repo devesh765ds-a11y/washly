@@ -2,44 +2,53 @@
 <html>
 
 <head>
-
 <title>Schedule Pickup</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <nav>
-
-<div class="logo">Washly</div>
-
-<div>
-<a href="index.html">Home</a>
-<a href="catalogue.html">Catalogue</a>
-<a href="login.html">Login</a>
-</div>
-
+  <div class="logo">Washly</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="catalogue.html">Catalogue</a>
+    <a href="login.html">Login</a>
+  </div>
 </nav>
 
+<div class="schedule-container">
 
-<div class="container">
+  <h2>Schedule Laundry Pickup</h2>
+  <p class="sub">Choose a convenient time slot</p>
 
-<h2>Schedule Laundry Pickup</h2>
+  <!-- Illustration -->
+  <img class="illustration" src="https://cdn-icons-png.flaticon.com/512/2503/2503488.png">
 
-<p>Select a time slot</p>
+  <!-- Time Slots -->
+  <div class="slots">
+    <div class="time-slot">8:00 AM - 10:00 AM</div>
+    <div class="time-slot">10:00 AM - 12:00 PM</div>
+    <div class="time-slot">12:00 PM - 2:00 PM</div>
+    <div class="time-slot">2:00 PM - 4:00 PM</div>
+    <div class="time-slot">4:00 PM - 6:00 PM</div>
+    <div class="time-slot">6:00 PM - 8:00 PM</div>
+  </div>
 
-<div class="time-slot">8:00 AM - 10:00 AM</div>
-<div class="time-slot">10:00 AM - 12:00 PM</div>
-<div class="time-slot">12:00 PM - 2:00 PM</div>
-<div class="time-slot">2:00 PM - 4:00 PM</div>
-<div class="time-slot">4:00 PM - 6:00 PM</div>
-
-<br><br>
-
-<button>Confirm Pickup</button>
+  <button class="confirm-btn">Confirm Pickup</button>
 
 </div>
+
+<script>
+  // Select slot interaction
+  const slots = document.querySelectorAll('.time-slot');
+  slots.forEach(slot => {
+    slot.addEventListener('click', () => {
+      slots.forEach(s => s.classList.remove('active'));
+      slot.classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
