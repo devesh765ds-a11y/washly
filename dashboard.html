@@ -1,55 +1,633 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Garment Tracking</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://unpkg.com/html5-qrcode"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Garment - Washly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0d1f35;
+      --navy-mid: #122540;
+      --navy-light: #1a3050;
+      --cream: #f0e6c8;
+      --cream-muted: #c9b98a;
+      --white: #ffffff;
+      --text-muted: rgba(240, 230, 200, 0.55);
+      --border: rgba(240, 230, 200, 0.12);
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --info: #60a5fa;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: var(--navy);
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--cream);
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: -0.3px;
+      transition: color 0.15s;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.15s;
+    }
+
+    .logo a:hover {
+      color: var(--white);
+    }
+
+    nav > div:last-child {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 8px 18px;
+      border-radius: 999px;
+      transition: all 0.15s;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      background: rgba(240, 230, 200, 0.05);
+    }
+
+    nav a.cta {
+      background: var(--cream);
+      color: var(--navy);
+      font-weight: 500;
+      padding: 10px 28px;
+    }
+
+    nav a.cta:hover {
+      background: var(--cream-muted);
+    }
+
+    /* MAIN CONTAINER */
+    .tracking-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .tracking-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ILLUSTRATION */
+    .tracking-img {
+      width: 120px;
+      height: 120px;
+      margin: 1.5rem auto;
+      opacity: 0.9;
+    }
+
+    /* TABS */
+    .tab-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .tab-btn:hover {
+      color: var(--cream);
+    }
+
+    .tab-btn.active {
+      color: var(--cream);
+      border-bottom-color: var(--cream);
+    }
+
+    /* TAB CONTENT */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* QR SCANNER */
+    .scanner-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #reader {
+      width: 100%;
+    }
+
+    #reader img,
+    #reader video {
+      border-radius: 8px;
+    }
+
+    /* ORDER ID INPUT */
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+
+    .input-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input-group input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cream-muted);
+    }
+
+    .input-group button {
+      padding: 12px 32px;
+      background: var(--cream);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .input-group button:hover {
+      background: var(--cream-muted);
+    }
+
+    /* RESULT BOX */
+    .result-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .status-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+      z-index: 2;
+    }
+
+    .status-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      border: 2px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s;
+    }
+
+    .status-item.active .status-icon {
+      background: var(--cream);
+      color: var(--navy);
+      border-color: var(--cream);
+      box-shadow: 0 0 20px rgba(240, 230, 200, 0.3);
+    }
+
+    .status-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .status-item.active .status-label {
+      color: var(--cream);
+    }
+
+    .status-connector {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .status-item.active ~ .status-item .status-connector,
+    .status-connector.active {
+      background: var(--cream);
+    }
+
+    .result-message {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .result-info {
+      background: rgba(240, 230, 200, 0.06);
+      border-left: 3px solid var(--cream);
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: left;
+      font-size: 13px;
+      color: var(--cream);
+    }
+
+    .result-info p {
+      margin: 0.5rem 0;
+    }
+
+    .result-info strong {
+      color: var(--white);
+    }
+
+    .close-result {
+      margin-top: 1.5rem;
+      padding: 10px 24px;
+      background: rgba(240, 230, 200, 0.1);
+      border: 0.5px solid var(--border);
+      color: var(--cream);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      transition: all 0.15s;
+    }
+
+    .close-result:hover {
+      background: rgba(240, 230, 200, 0.15);
+    }
+
+    @media (max-width: 600px) {
+      .tracking-container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      .tracking-container h2 {
+        font-size: 28px;
+      }
+
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      nav > div:last-child a:not(.cta) {
+        display: none;
+      }
+
+      .status-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .status-connector {
+        display: none;
+      }
+
+      .input-group {
+        flex-direction: column;
+      }
+
+      .input-group button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <nav>
-  <div class="logo">Washly</div>
+  <div class="logo"><a href="index.html">Washly</a></div>
   <div>
     <a href="index.html">Home</a>
     <a href="catalogue.html">Catalogue</a>
+    <a href="schedule.html">Schedule Pickup</a>
+    <a href="login.html" class="cta">Login</a>
   </div>
 </nav>
 
 <div class="tracking-container">
-
   <h2>Track Your Garment</h2>
-  <p class="sub">Scan QR code to check status</p>
+  <p class="sub">Scan QR code or enter order ID to check status</p>
 
-  <!-- Illustration -->
-  <img class="tracking-img" src="https://cdn-icons-png.flaticon.com/512/5676/5676350.png">
+  <img class="tracking-img" src="https://cdn-icons-png.flaticon.com/512/5676/5676350.png" alt="Tracking">
 
-  <!-- Scanner Box -->
-  <div class="scanner-box">
-    <div id="reader"></div>
+  <!-- TAB NAVIGATION -->
+  <div class="tab-container">
+    <button class="tab-btn active" onclick="switchTab('qr')">QR Code</button>
+    <button class="tab-btn" onclick="switchTab('orderid')">Order ID</button>
   </div>
 
-  <!-- Result -->
-  <div id="result" class="result-box"></div>
+  <!-- QR CODE TAB -->
+  <div id="qr" class="tab-content active">
+    <div class="scanner-box">
+      <div id="reader"></div>
+    </div>
+  </div>
+
+  <!-- ORDER ID TAB -->
+  <div id="orderid" class="tab-content">
+    <div class="input-group">
+      <input type="text" id="orderInput" placeholder="Enter your Order ID (e.g., WL-2026-12345)">
+      <button onclick="trackByOrderId()">Track</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="result-box">
+    <h3 id="resultTitle">Your Order Status</h3>
+    
+    <div class="status-container">
+      <div class="status-item" id="status-washing">
+        <div class="status-icon">🚿</div>
+        <div class="status-label">Washing</div>
+      </div>
+      <div class="status-connector"></div>
+      <div class="status-item" id="status-packing">
+        <div class="status-icon">📦</div>
+        <div class="status-label">Packing</div>
+      </div>
+      <div class="status-connector"></div>
+      <div class="status-item" id="status-delivery">
+        <div class="status-icon">🚚</div>
+        <div class="status-label">Out for Delivery</div>
+      </div>
+    </div>
+
+    <div class="result-message" id="resultMessage"></div>
+
+    <div class="result-info">
+      <p><strong>Order ID:</strong> <span id="displayOrderId"></span></p>
+      <p><strong>Current Status:</strong> <span id="displayStatus"></span></p>
+      <p><strong>Estimated Delivery:</strong> <span id="deliveryDate"></span></p>
+    </div>
+
+    <button class="close-result" onclick="closeResult()">Close</button>
+  </div>
 
 </div>
 
 <script>
-function onScanSuccess(decodedText){
+  let scanner = null;
+  let isScannerRunning = false;
 
-document.getElementById("result").innerHTML =
-"<h3>Garment ID: "+decodedText+"</h3>"+
-"<p>Status: Washing in progress</p>"
+  // Initialize scanner
+  function initializeScanner() {
+    if (!isScannerRunning && scanner === null) {
+      scanner = new Html5QrcodeScanner('reader', { fps: 10, qrbox: 250 });
+      scanner.render(onScanSuccess);
+      isScannerRunning = true;
+    }
+  }
 
-}
+  // Tab switching
+  function switchTab(tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    contents.forEach(content => content.classList.remove('active'));
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
 
-let scanner = new Html5QrcodeScanner(
-"reader",
-{fps:10, qrbox:250}
-)
+    // Handle scanner on tab switch
+    if (tabName === 'qr') {
+      // Reinitialize scanner when switching to QR tab
+      setTimeout(() => {
+        initializeScanner();
+      }, 100);
+    } else {
+      // Stop scanner when switching away from QR tab
+      if (scanner !== null && isScannerRunning) {
+        scanner.clear().then(() => {
+          scanner = null;
+          isScannerRunning = false;
+        }).catch(err => {
+          console.log('Scanner cleanup error:', err);
+          scanner = null;
+          isScannerRunning = false;
+        });
+      }
+    }
+  }
 
-scanner.render(onScanSuccess)
+  // Status statuses
+  const statuses = [
+    {
+      status: 'Washing in Progress',
+      activeStep: 'status-washing',
+      message: 'Your garment is currently being washed with care.',
+      emoji: '🧼'
+    },
+    {
+      status: 'Getting Packed',
+      activeStep: 'status-packing',
+      message: 'Your clean garment is being packed and prepared for delivery.',
+      emoji: '📦'
+    },
+    {
+      status: 'Out for Delivery',
+      activeStep: 'status-delivery',
+      message: 'Your garment is on the way to your doorstep!',
+      emoji: '🚚'
+    }
+  ];
+
+  // Random status
+  function getRandomStatus() {
+    return statuses[Math.floor(Math.random() * statuses.length)];
+  }
+
+  // Get estimated delivery date
+  function getDeliveryDate() {
+    const today = new Date();
+    const delivery = new Date(today.setDate(today.getDate() + 1));
+    return delivery.toLocaleDateString('en-IN', { 
+      weekday: 'short', 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  }
+
+  // Show result
+  function showResult(id) {
+    const selectedStatus = getRandomStatus();
+    const resultBox = document.getElementById('result');
+    
+    // Update status display
+    document.querySelectorAll('.status-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    document.getElementById(selectedStatus.activeStep).classList.add('active');
+
+    // Update result info
+    document.getElementById('resultTitle').textContent = selectedStatus.emoji + ' ' + selectedStatus.status;
+    document.getElementById('resultMessage').textContent = selectedStatus.message;
+    document.getElementById('displayOrderId').textContent = id;
+    document.getElementById('displayStatus').textContent = selectedStatus.status;
+    document.getElementById('deliveryDate').textContent = getDeliveryDate();
+
+    resultBox.classList.add('show');
+    window.scrollTo({ top: resultBox.offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // Track by Order ID
+  function trackByOrderId() {
+    const orderId = document.getElementById('orderInput').value.trim();
+    
+    if (!orderId) {
+      alert('Please enter an Order ID');
+      return;
+    }
+
+    showResult(orderId);
+  }
+
+  // Close result
+  function closeResult() {
+    document.getElementById('result').classList.remove('show');
+    document.getElementById('orderInput').value = '';
+  }
+
+  // QR Code Scanner
+  function onScanSuccess(decodedText) {
+    showResult(decodedText);
+  }
+
+  // Initialize scanner on page load
+  initializeScanner();
+
+  // Allow Enter key for order ID input
+  document.getElementById('orderInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      trackByOrderId();
+    }
+  });
 </script>
 
 </body>
