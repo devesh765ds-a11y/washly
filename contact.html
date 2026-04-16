@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Washly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0d1f35;
+      --navy-mid: #122540;
+      --navy-light: #1a3050;
+      --cream: #f0e6c8;
+      --cream-muted: #c9b98a;
+      --white: #ffffff;
+      --text-muted: rgba(240, 230, 200, 0.55);
+      --border: rgba(240, 230, 200, 0.12);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: var(--navy);
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--cream);
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: -0.3px;
+      transition: color 0.15s;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.15s;
+    }
+
+    .logo a:hover {
+      color: var(--white);
+    }
+
+    nav > div:last-child {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 8px 18px;
+      border-radius: 999px;
+      transition: all 0.15s;
+    }
+
+    nav a:not(.cta):hover {
+      color: var(--white);
+      background: rgba(240, 230, 200, 0.05);
+    }
+
+    nav a.cta {
+      background: var(--cream);
+      color: var(--navy);
+      font-weight: 500;
+      padding: 10px 28px;
+    }
+
+    nav a.cta:hover {
+      background: var(--cream-muted);
+    }
+
+    /* HEADER SECTION */
+    .contact-header {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 0.5px solid var(--border);
+      background: radial-gradient(ellipse at 60% 40%, #1a3a5c 0%, var(--navy) 70%);
+    }
+
+    .contact-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .contact-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* MAIN CONTAINER */
+    .contact-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    /* CONTACT INFO SECTION */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .info-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(240, 230, 200, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .info-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(240, 230, 200, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .info-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .info-details {
+      margin-left: 66px;
+    }
+
+    .info-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .info-value {
+      font-size: 15px;
+      color: var(--cream);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .info-value a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .info-value a:hover {
+      color: var(--white);
+      text-decoration: underline;
+    }
+
+    /* CONTACT FORM */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cream-muted);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    .form-group select option {
+      background: var(--navy);
+      color: var(--cream);
+    }
+
+    .form-submit {
+      padding: 14px 32px;
+      background: var(--cream);
+      color: var(--navy);
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--cream-muted);
+      transform: translateY(-2px);
+    }
+
+    .form-submit:active {
+      transform: translateY(0);
+    }
+
+    /* HOURS SECTION */
+    .hours-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 1rem;
+    }
+
+    .hours-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .hour-item {
+      border-bottom: 0.5px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .hour-item:last-child {
+      border-bottom: none;
+    }
+
+    .hour-day {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cream);
+      display: block;
+    }
+
+    .hour-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* MAP SECTION */
+    .map-section {
+      width: 100%;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 0.5px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .map-section iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* RESPONSE MESSAGE */
+    .form-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .form-message.success {
+      background: rgba(74, 222, 128, 0.1);
+      border: 0.5px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      display: block;
+    }
+
+    .form-message.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 0.5px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      display: block;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      nav > div:last-child a:not(.cta) {
+        display: none;
+      }
+
+      .contact-header h1 {
+        font-size: 36px;
+      }
+
+      .hours-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .contact-wrapper {
+        padding: 2rem 1rem;
+      }
+
+      .contact-header {
+        padding: 2rem 1rem;
+      }
+
+      .contact-header h1 {
+        font-size: 28px;
+      }
+
+      .info-card {
+        padding: 1.5rem;
+      }
+
+      .map-section {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo"><a href="index.html">Washly</a></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="schedule.html">Schedule Pickup</a>
+    <a href="catalogue.html">Catalogue</a>
+    <a href="login.html" class="cta">Login</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="contact-header">
+  <h1>Get in Touch</h1>
+  <p>Have a question or need assistance? We're here to help. Reach out to us anytime, and our team will get back to you as soon as possible.</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="contact-wrapper">
+  
+  <!-- CONTACT INFORMATION -->
+  <div class="contact-info">
+    
+    <!-- PHONE -->
+    <div class="info-card">
+      <div class="info-header">
+        <div class="info-icon">📞</div>
+        <h3>Phone</h3>
+      </div>
+      <div class="info-details">
+        <span class="info-label">Call Us Anytime</span>
+        <div class="info-value">
+          <a href="tel:+919069512010">+91 90695 12010</a>
+        </div>
+        <span class="info-label" style="margin-top: 0.75rem;">Response Time</span>
+        <div class="info-value">Within 2 hours</div>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="info-card">
+      <div class="info-header">
+        <div class="info-icon">✉️</div>
+        <h3>Email</h3>
+      </div>
+      <div class="info-details">
+        <span class="info-label">Send Us a Message</span>
+        <div class="info-value">
+          <a href="mailto:24mba024@ncuindia.edu">24mba024@ncuindia.edu</a>
+        </div>
+        <span class="info-label" style="margin-top: 0.75rem;">Response Time</span>
+        <div class="info-value">Within 24 hours</div>
+      </div>
+    </div>
+
+    <!-- OFFICE -->
+    <div class="info-card">
+      <div class="info-header">
+        <div class="info-icon">📍</div>
+        <h3>Office</h3>
+      </div>
+      <div class="info-details">
+        <span class="info-label">Visit Us</span>
+        <div class="info-value">The Northcap University<br>Sector 23, Gurgaon<br>Haryana, India</div>
+        <span class="info-label" style="margin-top: 0.75rem;">Business Hours</span>
+        <div class="info-value">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat - Sun: 10:00 AM - 4:00 PM</div>
+      </div>
+    </div>
+
+    <!-- HOURS -->
+    <div class="hours-section">
+      <h3 class="hours-title">Service Hours</h3>
+      <div class="hours-grid">
+        <div class="hour-item">
+          <span class="hour-day">Monday - Friday</span>
+          <span class="hour-time">8:00 AM - 8:00 PM</span>
+        </div>
+        <div class="hour-item">
+          <span class="hour-day">Saturday</span>
+          <span class="hour-time">9:00 AM - 6:00 PM</span>
+        </div>
+        <div class="hour-item">
+          <span class="hour-day">Sunday</span>
+          <span class="hour-time">10:00 AM - 4:00 PM</span>
+        </div>
+        <div class="hour-item">
+          <span class="hour-day">Holidays</span>
+          <span class="hour-time">Closed</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div>
+    <form id="contactForm" onsubmit="handleContactForm(event)">
+      <h2 class="form-title">Send us a Message</h2>
+      <p class="form-subtitle">Fill out the form below and we'll get back to you shortly.</p>
+
+      <div id="formMessage" class="form-message"></div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" placeholder="How can we help?" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category *</label>
+        <select id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="General Inquiry">General Inquiry</option>
+          <option value="Service Issue">Service Issue</option>
+          <option value="Billing">Billing</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Partnership">Partnership</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group form-row full">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" placeholder="Tell us more about your inquiry..." required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- MAP SECTION -->
+<div class="map-section">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.3019477814584!2d77.0513649!3d28.5699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45c45c45c45%3A0x123456789!2sThe%20Northcap%20University!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<script>
+  function handleContactForm(event) {
+    event.preventDefault();
+
+    const formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      subject: document.getElementById('subject').value,
+      category: document.getElementById('category').value,
+      message: document.getElementById('message').value,
+      timestamp: new Date().toLocaleString('en-IN')
+    };
+
+    // Validate form
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      showMessage('Please fill in all required fields', 'error');
+      return;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      showMessage('Please enter a valid email address', 'error');
+      return;
+    }
+
+    // In production, you would send this to your backend
+    // For now, we'll just show a success message
+    console.log('Contact Form Data:', formData);
+    
+    // Simulate email sending (would need backend integration)
+    sendContactEmail(formData);
+
+    showMessage('✓ Thank you for reaching out! We will get back to you within 24 hours.', 'success');
+    
+    // Reset form
+    document.getElementById('contactForm').reset();
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+      document.getElementById('formMessage').style.display = 'none';
+    }, 5000);
+  }
+
+  function showMessage(message, type) {
+    const messageEl = document.getElementById('formMessage');
+    messageEl.textContent = message;
+    messageEl.className = `form-message ${type}`;
+  }
+
+  function sendContactEmail(data) {
+    // This would require a backend service (EmailJS, SendGrid, Node.js, etc.)
+    // For demo purposes, we're just logging the data
+    
+    const emailBody = `
+New Contact Form Submission
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone || 'Not provided'}
+Subject: ${data.subject}
+Category: ${data.category}
+
+Message:
+${data.message}
+
+---
+Submitted: ${data.timestamp}
+    `;
+
+    console.log('Email would be sent to: 24mba024@ncuindia.edu');
+    console.log('Email Body:', emailBody);
+
+    // To enable actual email sending, integrate with:
+    // - EmailJS (client-side)
+    // - SendGrid (API)
+    // - Your own backend service
+  }
+</script>
+
+</body>
+</html>
