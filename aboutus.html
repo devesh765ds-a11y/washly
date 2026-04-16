@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Washly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0d1f35;
+    --navy-mid: #122540;
+    --navy-light: #1a3050;
+    --cream: #f0e6c8;
+    --cream-muted: #c9b98a;
+    --white: #ffffff;
+    --text-muted: rgba(240, 230, 200, 0.55);
+    --border: rgba(240, 230, 200, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 64px;
+    background: var(--navy);
+    border-bottom: 0.5px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px; font-weight: 700;
+    color: var(--cream);
+    letter-spacing: -0.3px;
+  }
+  .logo a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+  }
+  .logo a:hover { color: var(--white); }
+  .nav-links { display: flex; gap: 6px; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 14px; font-weight: 400;
+    padding: 7px 18px;
+    border-radius: 999px;
+    color: var(--cream);
+    border: 0.5px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .nav-links a:hover { border-color: var(--border); color: var(--white); }
+  .nav-links a.cta {
+    background: var(--cream);
+    color: var(--navy);
+    font-weight: 500;
+    border-color: var(--cream);
+  }
+  .nav-links a.cta:hover { background: var(--cream-muted); border-color: var(--cream-muted); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    border-bottom: 0.5px solid var(--border);
+    background: radial-gradient(ellipse at 60% 40%, #1a3a5c 0%, var(--navy) 70%);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(240, 230, 200, 0.08);
+    color: var(--cream-muted);
+    font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 0.5px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .hero-badge::before { content: '✓'; color: var(--cream); }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px; font-weight: 700; line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .hero h1 span {
+    color: var(--cream);
+    font-style: italic;
+  }
+  .hero p {
+    font-size: 16px; color: var(--text-muted);
+    max-width: 500px; margin: 1.25rem auto 0;
+    line-height: 1.75;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex; justify-content: center;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .stat {
+    flex: 1; max-width: 200px;
+    text-align: center;
+    padding: 1.75rem 1rem;
+    border-right: 0.5px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--cream);
+    display: block;
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.3px; }
+
+  /* CONTENT */
+  .content { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+  .section-card {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: rgba(240, 230, 200, 0.08);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .section-card p {
+    font-size: 15px; color: var(--text-muted);
+    line-height: 1.8; margin-bottom: 0.85rem;
+  }
+  .section-card p:last-child { margin-bottom: 0; }
+
+  /* FOUNDER */
+  .founder-strip {
+    display: flex; align-items: center; gap: 1rem;
+    background: rgba(240, 230, 200, 0.06);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .founder-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--navy); flex-shrink: 0;
+  }
+  .founder-name { font-size: 15px; font-weight: 500; color: var(--cream); }
+  .founder-title { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* WHY GRID */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; margin-top: 0.25rem;
+  }
+  .why-item {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .why-item:hover {
+    background: rgba(240, 230, 200, 0.06);
+    border-color: rgba(240, 230, 200, 0.2);
+  }
+  .why-item .icon { font-size: 18px; }
+  .why-item .label { font-size: 13px; font-weight: 500; color: var(--cream); }
+  .why-item .desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* CTA BLOCK */
+  .cta-block {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+  }
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--white); margin-bottom: 0.6rem;
+  }
+  .cta-block h3 span { color: var(--cream); font-style: italic; }
+  .cta-block p { font-size: 15px; color: var(--text-muted); margin-bottom: 2rem; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--cream); color: var(--navy);
+    font-size: 14px; font-weight: 500;
+    padding: 12px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--cream-muted); }
+  .btn-secondary {
+    display: inline-block;
+    background: transparent; color: var(--cream);
+    font-size: 14px; font-weight: 400;
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: 0.5px solid rgba(240, 230, 200, 0.35);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--cream); color: var(--white); }
+
+  @media (max-width: 600px) {
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 34px; }
+    .nav-links a:not(.cta) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><a href="index.html">Washly</a></div>
+  <div class="nav-links">
+    <a href="schedule.html">Schedule Pickup</a>
+    <a href="catalogue.html">Catalogue</a>
+    <a href="track.html">Track Garment</a>
+    <a href="login.html" class="cta">Login</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Gurgaon's Trusted Laundry</div>
+  <h1>Our <span>Story.</span></h1>
+  <p>From pickup to delivery, Washly brings fast, reliable, and high quality laundry service right to your door so you never worry about your clothes again.</p>
+</div>
+
+
+<div class="content">
+
+  <div class="section-card">
+    
+    <div class="founder-strip">
+      <div class="founder-avatar">D</div>
+      <div>
+        <div class="founder-name">Devesh</div>
+        <div class="founder-title">Founder, Washly</div>
+      </div>
+    </div>
+    <p>Washly was founded by Devesh, a young entrepreneur who identified a common urban problem lack of time for everyday essentials like laundry.</p>
+    <p>Living in a fast-paced city like Gurgaon, Devesh realized that people were constantly juggling work, studies, and personal life, leaving little time for routine chores. Traditional laundry services were slow, inconsistent, or just plain inconvenient.</p>
+    <p>This sparked the idea to create a tech-enabled laundry service that is quick, reliable, and customer-focused. What started as a simple idea evolved into Washly a platform designed for seamless pickup, professional cleaning, and fast doorstep delivery.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="section-icon">🎯</span> Our vision</h2>
+    <p>Devesh aims to build Washly into a leading quick-commerce laundry brand in India, combining technology, logistics, and premium service standards.</p>
+    <p>The goal is not just to clean clothes, but to save time, simplify lives, and create a dependable service people can trust every single day.</p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="section-icon">✦</span> Why Washly?</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="icon">🚗</div>
+        <div class="label">Quick pickup</div>
+        <div class="desc">We come to you schedule in seconds, we handle the rest.</div>
+      </div>
+      <div class="why-item">
+        <div class="icon">👕</div>
+        <div class="label">Expert care</div>
+        <div class="desc">Professional cleaning with fabric-first techniques.</div>
+      </div>
+      <div class="why-item">
+        <div class="icon">📍</div>
+        <div class="label">Built for Gurgaon</div>
+        <div class="desc">Designed around the rhythm of urban life here.</div>
+      </div>
+      <div class="why-item">
+        <div class="icon">📲</div>
+        <div class="label">Easy tracking</div>
+        <div class="desc">Schedule, track, and receive all without the hassle.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h3>Ready to try <span>Washly?</span></h3>
+    <p>Schedule your first pickup today it only takes 30 seconds.</p>
+    <div class="cta-btns">
+      <a href="schedule.html" class="btn-primary">Schedule Pickup</a>
+      <a href="catalogue.html" class="btn-secondary">View Catalogue</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
