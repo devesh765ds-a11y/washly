@@ -1,31 +1,234 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Schedule Pickup</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule Pickup - Washly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0d1f35;
+      --navy-dark: #0a1428;
+      --cream: #f0e6c8;
+      --cream-muted: #c9b98a;
+      --white: #ffffff;
+      --text-muted: rgba(240, 230, 200, 0.6);
+      --border: rgba(240, 230, 200, 0.12);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: var(--navy);
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--cream);
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: -0.3px;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.15s;
+    }
+
+    .logo a:hover {
+      color: var(--white);
+    }
+
+    nav > div:last-child {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 8px 18px;
+      border-radius: 999px;
+      transition: all 0.15s;
+    }
+
+    nav a:not(.cta):hover {
+      color: var(--white);
+      background: rgba(240, 230, 200, 0.05);
+    }
+
+    nav a.cta {
+      background: var(--cream);
+      color: var(--navy);
+      font-weight: 500;
+      padding: 10px 28px;
+    }
+
+    nav a.cta:hover {
+      background: var(--cream-muted);
+    }
+
+    /* MAIN CONTAINER */
+    .schedule-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .schedule-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ILLUSTRATION */
+    .illustration {
+      width: 120px;
+      height: 120px;
+      margin: 1.5rem auto;
+      opacity: 0.9;
+    }
+
+    /* TIME SLOTS */
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 2.5rem 0;
+    }
+
+    .time-slot {
+      padding: 1.25rem;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .time-slot:hover {
+      border-color: var(--cream-muted);
+      background: rgba(240, 230, 200, 0.08);
+    }
+
+    .time-slot.active {
+      background: var(--cream);
+      color: var(--navy);
+      border-color: var(--cream);
+    }
+
+    /* BUTTON */
+    .confirm-btn {
+      width: 100%;
+      padding: 14px 32px;
+      background: var(--cream);
+      color: var(--navy);
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 1.5rem;
+    }
+
+    .confirm-btn:hover {
+      background: var(--cream-muted);
+      transform: translateY(-2px);
+    }
+
+    .confirm-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .schedule-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+
+      .schedule-container h2 {
+        font-size: 28px;
+      }
+
+      .slots {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      nav > div:last-child a:not(.cta) {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <nav>
-  <div class="logo">Washly</div>
+  <div class="logo"><a href="index.html">Washly</a></div>
   <div>
     <a href="index.html">Home</a>
     <a href="catalogue.html">Catalogue</a>
-    <a href="login.html">Login</a>
+    <a href="Dashboard.html">Track Garment</a>
+    <a href="login.html" class="cta">Login</a>
   </div>
 </nav>
 
 <div class="schedule-container">
-
   <h2>Schedule Laundry Pickup</h2>
   <p class="sub">Choose a convenient time slot</p>
 
-  <!-- Illustration -->
-  <img class="illustration" src="https://cdn-icons-png.flaticon.com/512/2503/2503488.png">
+  <img class="illustration" src="https://cdn-icons-png.flaticon.com/512/2503/2503488.png" alt="Laundry">
 
-  <!-- Time Slots -->
   <div class="slots">
     <div class="time-slot">8:00 AM - 10:00 AM</div>
     <div class="time-slot">10:00 AM - 12:00 PM</div>
@@ -36,17 +239,25 @@
   </div>
 
   <button class="confirm-btn">Confirm Pickup</button>
-
 </div>
 
 <script>
-  // Select slot interaction
   const slots = document.querySelectorAll('.time-slot');
   slots.forEach(slot => {
     slot.addEventListener('click', () => {
       slots.forEach(s => s.classList.remove('active'));
       slot.classList.add('active');
     });
+  });
+
+  const confirmBtn = document.querySelector('.confirm-btn');
+  confirmBtn.addEventListener('click', () => {
+    const activeSlot = document.querySelector('.time-slot.active');
+    if (activeSlot) {
+      alert('Pickup scheduled for ' + activeSlot.textContent);
+    } else {
+      alert('Please select a time slot');
+    }
   });
 </script>
 
